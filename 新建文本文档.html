@@ -1,0 +1,387 @@
+<!DOCTYPE html5>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>销售实况页面</title>
+
+<!--CSS样式-->
+<style>
+    * {
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	}
+	
+li {
+	list-style:none;
+	}
+	
+a {
+	text-decoration:none;
+	}
+
+    /*版心设计*/
+.wrapper {
+	margin:0 auto;
+    width: 1200px;
+	}
+
+.header {
+    height: 50px;
+    background-color:#2c65f2;
+
+}
+.header h1 {
+    float: left;
+    color:aliceblue;
+    line-height: 50px;
+    font-family:华文中宋;
+}
+
+.header li {
+	float:left;
+	margin-left:80px;
+    line-height: 46px;
+	font-size:22px;
+	font-weight:normal;
+	font-family: 华文中宋;
+    }
+.header li a {
+    color: aliceblue;
+}
+/*导航栏目鼠标悬停效果*/
+.header li:hover {
+	border-bottom:2px solid aliceblue;
+	}
+
+.header .picture {
+        float:right;
+        margin-right:35px;
+        }
+    
+.header .picture a {
+        display:inline-block;
+        height:50px;
+        line-height:50px;
+        color:aliceblue;
+        font-family:华文中宋;
+        }
+.header .picture img {
+        vertical-align:middle;
+    
+        }
+
+/*bodyer的css样式*/
+.bodyer {
+    height: 580px;
+    background-color: aqua;
+}
+.box {
+    float: left;
+    margin:20px 0;
+    margin-left:25px;
+    border: 2px solid aliceblue;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.bodyer .box1 {
+    width: 250px;
+    height: 250px;
+}
+.bodyer .box2 {
+    width: 600px;
+    height: 250px;
+}
+</style>
+
+
+<!--导入外部API  js代码区-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+
+</head>
+<body>
+    <!--头部代码-->
+    <div class="wrapper header">
+        <div>
+            <h1>
+               开山鼻组
+            </h1>
+        </div>
+        <!--导航栏div-ul-li-->
+        <div>
+        	<ul>
+            	<li><a href="#">销售实况</a></li>
+                <li><a href="#">客服中心</a></li>
+                <li><a href="#">管理员界面</a></li>
+                <li><a href="#">详细订单</a></li>
+             </ul>
+        </div>
+
+        <!--头像-->
+        <div class="picture">
+        	<a href="#">
+            <img src="../StudyWeb/images/user.png" />
+            <span>个人中心</span>
+            </a>
+        </div>
+
+    </div>
+
+    <!--实况图代码-->
+    <div class="wrapper bodyer">
+        <div class="box box1">
+            <h3>不同类型耳机销售占比</h3>
+            <div id="container" style="height: 100%"></div>
+        </div>
+        <div class="box box2">
+            <h3>历史销售数据对比</h3>
+            <div id="history" style="height: 100%"></div>
+        </div>
+        <div class="box box1">
+            <h3>用户年龄分布图</h3>
+            <div id="con" style="height:100%"></div>
+            
+        </div>
+        <div class="box box1">
+            <h3>营销额</h3>
+        </div>
+        <div class="box box1">
+            <h3>用户评价情况</h3>
+            <div id="assess" style="height:100%"></div>
+        </div>
+        <div class="box box2">
+            <h3>支付订单详情</h3>
+        </div>
+    
+    </div>
+    <script type="text/javascript">
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        
+        var option;
+        
+        
+        
+        option = {
+          tooltip: {
+            trigger: 'item'
+          },
+          legend: {
+            top: '5%',
+            left: 'center'
+          },
+          series: [
+            {
+              name: 'Access From',
+              type: 'pie',
+              radius: ['40%', '70%'],
+              avoidLabelOverlap: false,
+              label: {
+                show: false,
+                position: 'center'
+              },
+              emphasis: {
+                label: {
+                  show: true,
+                  fontSize: '40',
+                  fontWeight: 'bold'
+                }
+              },
+              labelLine: {
+                show: false
+              },
+              data: [
+                { value: 1048, name: '耳机1' },
+                { value: 735, name: '耳机2' },
+                { value: 580, name: '耳机3' },
+                { value: 484, name: '耳机4' },
+
+              ]
+            }
+          ]
+        };
+        
+        if (option && typeof option === 'object') {
+            myChart.setOption(option);
+        }
+        
+        </script>
+        <script type="text/javascript">
+            var dom = document.getElementById("con");
+            var myChart = echarts.init(dom);
+            var app = {};
+            
+            var option;
+            
+            
+            
+            option = {
+              legend: {
+                top: 'bottom'
+              },
+              toolbox: {
+                show: true,
+                feature: {
+                  mark: { show: true },
+                  dataView: { show: true, readOnly: false },
+                  restore: { show: true },
+                  saveAsImage: { show: true }
+                }
+              },
+              series: [
+                {
+                  name: 'Nightingale Chart',
+                  type: 'pie',
+                  radius: [50, 250],
+                  center: ['50%', '50%'],
+                  roseType: 'area',
+                  itemStyle: {
+                    borderRadius: 8
+                  },
+                  data: [
+                    { value: 40, name: '8~16' },
+                    { value: 38, name: '16~20' },
+                    { value: 32, name: '21~30' },
+                    { value: 30, name: '31~40' },
+                    { value: 28, name: '41~50' },
+                    { value: 26, name: '50<' },
+                  ]
+                }
+              ]
+            };
+            
+            if (option && typeof option === 'object') {
+                myChart.setOption(option);
+            }
+            
+                    </script>
+
+            <!--动态排序动态图-->
+            <script type="text/javascript">
+                var dom = document.getElementById("history");
+                var myChart = echarts.init(dom);
+                var app = {};
+                
+                var option;
+                
+                
+                
+                const data = [];
+                for (let i = 0; i < 5; ++i) {
+                  data.push(Math.round(Math.random() * 200));
+                }
+                option = {
+                  xAxis: {
+                    max: 'dataMax'
+                  },
+                  yAxis: {
+                    type: 'category',
+                    data: ['A', 'B', 'C', 'D'],
+                    inverse: true,
+                    animationDuration: 300,
+                    animationDurationUpdate: 300,
+                    max: 2 // only the largest 3 bars will be displayed
+                  },
+                  series: [
+                    {
+                      realtimeSort: true,
+                      name: 'X',
+                      type: 'bar',
+                      data: data,
+                      label: {
+                        show: true,
+                        position: 'right',
+                        valueAnimation: true
+                      }
+                    }
+                  ],
+                  legend: {
+                    show: true
+                  },
+                  animationDuration: 0,
+                  animationDurationUpdate: 3000,
+                  animationEasing: 'linear',
+                  animationEasingUpdate: 'linear'
+                };
+                function run() {
+                  for (var i = 0; i < data.length; ++i) {
+                    if (Math.random() > 0.9) {
+                      data[i] += Math.round(Math.random() * 2000);
+                    } else {
+                      data[i] += Math.round(Math.random() * 200);
+                    }
+                  }
+                  myChart.setOption({
+                    series: [
+                      {
+                        type: 'bar',
+                        data
+                      }
+                    ]
+                  });
+                }
+                setTimeout(function () {
+                  run();
+                }, 0);
+                setInterval(function () {
+                  run();
+                }, 3000);
+                
+                if (option && typeof option === 'object') {
+                    myChart.setOption(option);
+                }
+                
+                        </script>
+                           <!--用户评价-->
+            <script type="text/javascript">
+                var dom = document.getElementById("assess");
+                var myChart = echarts.init(dom);
+                var app = {};
+                
+                var option;
+                
+                
+                
+                option = {
+                 
+                  tooltip: {
+                    trigger: 'item'
+                  },
+                  legend: {
+                    orient: 'vertical',
+                    left: 'left'
+                  },
+                  series: [
+                    {
+                      name: 'Access From',
+                      type: 'pie',
+                      radius: '50%',
+                      data: [
+                        { value: 1048, name: '好评' },
+                        { value: 210, name: '差评' },
+                        { value: 580, name: '未评价' },
+                  
+                      ],
+                      emphasis: {
+                        itemStyle: {
+                          shadowBlur: 10,
+                          shadowOffsetX: 0,
+                          shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                      }
+                    }
+                  ]
+                };
+                
+                if (option && typeof option === 'object') {
+                    myChart.setOption(option);
+                }
+                
+                        </script>
+
+         
+        
+</body>
+</html>
